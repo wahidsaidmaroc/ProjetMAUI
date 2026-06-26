@@ -1,8 +1,17 @@
 <Solution>
   <Folder Name="/BackEnd/">
-    <Project Path="BackEnd/OrderManagement.API/OrderManagement.API.csproj" />
+    	<Project Path="BackEnd/OrderManagement.API/OrderManagement.API.csproj" />
+        <Project Path="BackEnd/OrderManagement.Infra/OrderManagement.Infra.csproj" />
+        <Project Path="BackEnd/OrderManagement.Domain/OrderManagement.Domain.csproj" />
+        <Project Path="BackEnd/OrderManagement.Application/OrderManagement.Application.csproj" />
+
   </Folder>
-  <Project Path="OrderManagement.Mobile/OrderManagement.Mobile.csproj">
+  <Folder Name="/Mobile/">
+  	<Project Path="Mobile/OrderManagement.Mobile/OrderManagement.Mobile.csproj">
     <Deploy Solution="Debug|*" />
   </Project>
+
+  </Folder>
+
+
 </Solution>
