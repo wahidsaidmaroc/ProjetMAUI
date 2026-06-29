@@ -2,10 +2,10 @@
 
 namespace OrderManagement.Application.ProductService
 {
-    public class ProductServices : IProductService
+    public class InvoiceServices : IProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductServices(IProductRepository productRepository)
+        public InvoiceServices(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
