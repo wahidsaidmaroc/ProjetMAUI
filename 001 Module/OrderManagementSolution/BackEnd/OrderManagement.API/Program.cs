@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using OrderManagement.Application.CategoryService;
 using OrderManagement.Application.ProductService;
 using OrderManagement.Infra;
 
@@ -16,6 +17,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IProductService, ProductServices>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddDbContext<AppMyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
