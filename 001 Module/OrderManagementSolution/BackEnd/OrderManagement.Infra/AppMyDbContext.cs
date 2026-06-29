@@ -14,6 +14,7 @@ public class AppMyDbContext : DbContext
     public virtual DbSet<Order> Orders { get; set; }
     public virtual DbSet<OrderItems> OrderItems { get; set; }
     public virtual DbSet<Product> Products { get; set; }
+    public virtual DbSet<Payement> Payements { get; set; }
 
 
 

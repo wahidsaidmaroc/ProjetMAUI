@@ -1,5 +1,4 @@
 ﻿
-using AutoMapper;
 using OrderManagement.Domain.Entities;
 
 namespace OrderManagement.Application;
@@ -7,15 +6,15 @@ namespace OrderManagement.Application;
 
 
 
-public class ProductProfile : Profile
+public class ProductProfile //: Profile
 {
     public ProductProfile()
     {
         // Entity → DTO
-        CreateMap<Product, ProductDto>()
-            .ForMember(dest => dest.Cle, opt => opt.MapFrom(src => src.Id))
-            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProdDescription))
-            .ForMember(dest => dest.Prix, opt => opt.MapFrom(src => src.UnitPrice));
+        //CreateMap<Product, ProductDto>()
+        //    .ForMember(dest => dest.Cle, opt => opt.MapFrom(src => src.Id))
+        //    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProdDescription))
+        //    .ForMember(dest => dest.Prix, opt => opt.MapFrom(src => src.UnitPrice));
 
         // DTO → Entity
         //CreateMap<ProductDto, Product>()
