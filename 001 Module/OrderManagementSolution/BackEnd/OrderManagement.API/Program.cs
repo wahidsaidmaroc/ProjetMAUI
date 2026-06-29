@@ -1,8 +1,26 @@
+using Microsoft.EntityFrameworkCore;
+using OrderManagement.Application.ProductService;
+using OrderManagement.Infra;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 builder.Services.AddControllers();
+
+
+builder.Services.AddScoped<IProductService, ProductServices>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddDbContext<AppMyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
