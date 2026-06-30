@@ -26,6 +26,13 @@
             ContentTemplate="{DataTemplate V:ProductPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Category"
+                Icon="home.png">
+        <ShellContent
+            Title="Category"
+            ContentTemplate="{DataTemplate V:CategoryPage}" />
+    </FlyoutItem>
+
 
     <FlyoutItem Title="Login"
                 Icon="home.png">
