@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using OrderManagement.Application.PayementService;
+using OrderManagement.Application.CategoryService;
 using OrderManagement.Application.ProductService;
 using OrderManagement.Infra;
 
@@ -17,6 +19,12 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IProductService, InvoiceServices>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+builder.Services.AddScoped<IPayementService, PayementServices>();
+builder.Services.AddScoped<IPayementRepository, PayementRepository>();
 
 builder.Services.AddDbContext<AppMyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
