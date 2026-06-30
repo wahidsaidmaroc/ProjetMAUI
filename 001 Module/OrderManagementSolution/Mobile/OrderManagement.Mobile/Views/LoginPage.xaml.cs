@@ -5,33 +5,29 @@ public partial class LoginPage : ContentPage
 	public LoginPage()
 	{
 		InitializeComponent();
-	}
-
-    private async void OnLoginClicked(object sender, EventArgs e)
-    {
-        ErrorLabel.IsVisible = false;
-        ErrorLabel.Text = string.Empty;
-
-        if (string.IsNullOrWhiteSpace(EmailEntry.Text) ||
-            string.IsNullOrWhiteSpace(PasswordEntry.Text))
+        var email = new Entry { Placeholder = "Email" };
+        var motDePasse = new Entry
         {
-            ErrorLabel.Text = "Veuillez remplir tous les champs.";
-            ErrorLabel.IsVisible = true;
-            return;
-        }
+            Placeholder = "Mot de passe",
+            IsPassword = true
+        };
+        var connexion = new Button { Text = "Se connecter" };
+        var message = new Label { TextColor = Colors.Red };
 
-        // Exemple simple pour TP
-        if (EmailEntry.Text == "admin@test.com" && PasswordEntry.Text == "1234")
-        {
-            await DisplayAlert("Succès", "Connexion réussie.", "OK");
+        connexion.Clicked += (s, e) =>
+            message.Text = (email.Text == "admin")
+                ? "Bienvenue !" : "Identifiants invalides";
 
-            // Navigation vers HomePage
-            await Navigation.PushAsync(new MainPage());
-        }
-        else
+        Content = new VerticalStackLayout
         {
-            ErrorLabel.Text = "Email ou mot de passe incorrect.";
-            ErrorLabel.IsVisible = true;
-        }
+            Padding = 30,
+            Spacing = 15,
+            Children = { email, motDePasse, connexion, message }
+        };
+
     }
+
+
+
+
 }

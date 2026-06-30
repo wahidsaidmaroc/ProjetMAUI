@@ -5,40 +5,60 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:OrderManagement.Mobile"
     xmlns:V="clr-namespace:OrderManagement.Mobile.Views"
-
+    FlyoutBehavior="Flyout"
     Title="OrderManagement.Mobile">
 
-    <!--<TabBar>
+
+
+
+    <FlyoutItem Title="Accueil"
+                Icon="home.png">
         <ShellContent
-        Title="Order Management"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png',
-            MacCatalyst='icon_notes_ios.png'}" />
+            Title="Accueil"
+            ContentTemplate="{DataTemplate V:ProductPage}" />
+    </FlyoutItem>
 
-        
+
+    <FlyoutItem Title="Produit"
+                Icon="home.png">
         <ShellContent
-            Title="About"
-            ContentTemplate="{DataTemplate V:AboutPage}"
-            Icon="{OnPlatform 'dotnet_bot.png', iOS='dotnet_bot.png',
-            MacCatalyst='dotnet_bot.png'}" />
-    </TabBar>-->
+            Title="Produit"
+            ContentTemplate="{DataTemplate V:ProductPage}" />
+    </FlyoutItem>
+
+
+    <FlyoutItem Title="Login"
+                Icon="home.png">
+        <ShellContent
+            Title="Loging"
+            ContentTemplate="{DataTemplate V:LoginPage}" />
+    </FlyoutItem>
 
 
 
-    <TabBar>
-        <Tab Title="Accueil" Icon="home.png">
-            <!--<ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />-->
-        </Tab>
-        <Tab Title="Commandes" Icon="orders.png">
-            <!--<ShellContent ContentTemplate="{DataTemplate pages:OrdersPage}" />-->
-        </Tab>
-        <Tab Title="Produits" Icon="products.png">
-            <!--<ShellContent ContentTemplate="{DataTemplate pages:ProductsPage}" />-->
-        </Tab>
-        <Tab Title="Paiement" Icon="products.png">
-            <!--<ShellContent ContentTemplate="{DataTemplate pages:ProductsPage}" />-->
-        </Tab>
-    </TabBar>
+
+
+        <TabBar>
+
+            <Tab Title="Accueil" Icon="home.png">
+                <ShellContent
+                ContentTemplate="{DataTemplate V:AboutPage}" />
+            </Tab>
+
+            <Tab Title="Produits" Icon="product.png">
+                <ShellContent
+                ContentTemplate="{DataTemplate V:AboutPage}" />
+            </Tab>
+
+            <Tab Title="Paramètres" Icon="settings.png">
+                <ShellContent
+                ContentTemplate="{DataTemplate V:AboutPage}" />
+            </Tab>
+
+        </TabBar>
+
 
 
 </Shell>
+
+

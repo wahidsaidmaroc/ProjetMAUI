@@ -3,4 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OrderManagement.Mobile.MainPage">
 
+    <VerticalStackLayout Padding="20" Spacing="10">
+        <Label Text="Bienvenue !" FontSize="24" />
+
+        <Label Text="Bonjour"
+       FontSize="22"
+       TextColor="DarkBlue"
+       HorizontalOptions="Center" />
+
+
+    </VerticalStackLayout>
+
+
 </ContentPage>
