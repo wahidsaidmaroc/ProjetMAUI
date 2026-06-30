@@ -8,7 +8,7 @@
 
     Title="OrderManagement.Mobile">
 
-    <TabBar>
+    <!--<TabBar>
         <ShellContent
         Title="Order Management"
         ContentTemplate="{DataTemplate local:MainPage}"
@@ -21,10 +21,24 @@
             ContentTemplate="{DataTemplate V:AboutPage}"
             Icon="{OnPlatform 'dotnet_bot.png', iOS='dotnet_bot.png',
             MacCatalyst='dotnet_bot.png'}" />
+    </TabBar>-->
+
+
+
+    <TabBar>
+        <Tab Title="Accueil" Icon="home.png">
+            <!--<ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />-->
+        </Tab>
+        <Tab Title="Commandes" Icon="orders.png">
+            <!--<ShellContent ContentTemplate="{DataTemplate pages:OrdersPage}" />-->
+        </Tab>
+        <Tab Title="Produits" Icon="products.png">
+            <!--<ShellContent ContentTemplate="{DataTemplate pages:ProductsPage}" />-->
+        </Tab>
+        <Tab Title="Paiement" Icon="products.png">
+            <!--<ShellContent ContentTemplate="{DataTemplate pages:ProductsPage}" />-->
+        </Tab>
     </TabBar>
-    
-
-
 
 
 </Shell>
