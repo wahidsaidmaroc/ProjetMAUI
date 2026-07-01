@@ -3,62 +3,45 @@
     x:Class="OrderManagement.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:OrderManagement.Mobile"
     xmlns:V="clr-namespace:OrderManagement.Mobile.Views"
-    FlyoutBehavior="Flyout"
+        FlyoutBehavior="Flyout"
     Title="OrderManagement.Mobile">
 
+    <TabBar FlyoutItemIsVisible="False">
+        <Tab Title="Accueil" Icon="home.png">
+            <ShellContent
+                Title="Accueil"
+                ContentTemplate="{DataTemplate V:ProductPage}" />
+        </Tab>
 
+        <Tab Title="Produits" Icon="home.png">
+            <ShellContent
+                Title="Produits"
+                ContentTemplate="{DataTemplate V:ProductPage}" />
+        </Tab>
 
+        <Tab Title="Connexion" Icon="home.png">
+            <ShellContent
+                Title="Connexion"
+                ContentTemplate="{DataTemplate V:LoginPage}" />
+        </Tab>
+    </TabBar>
 
-    <FlyoutItem Title="Accueil"
-                Icon="home.png">
+    <FlyoutItem Title="Aide" Icon="home.png" Route="aide">
         <ShellContent
-            Title="Accueil"
-            ContentTemplate="{DataTemplate V:ProductPage}" />
+            Title="Aide"
+            ContentTemplate="{DataTemplate V:AboutPage}" />
     </FlyoutItem>
 
-
-    <FlyoutItem Title="Produit"
-                Icon="home.png">
+    <FlyoutItem Title="Parametres" Icon="home.png" Route="parametres">
         <ShellContent
-            Title="Produit"
-            ContentTemplate="{DataTemplate V:ProductPage}" />
+            Title="Parametres"
+            ContentTemplate="{DataTemplate V:SettingsPage}" />
     </FlyoutItem>
 
-
-    <FlyoutItem Title="Login"
-                Icon="home.png">
+    <FlyoutItem Title="Mon compte" Icon="home.png" Route="mon-compte">
         <ShellContent
-            Title="Loging"
+            Title="Mon compte"
             ContentTemplate="{DataTemplate V:LoginPage}" />
     </FlyoutItem>
-
-
-
-
-
-        <TabBar>
-
-            <Tab Title="Accueil" Icon="home.png">
-                <ShellContent
-                ContentTemplate="{DataTemplate V:AboutPage}" />
-            </Tab>
-
-            <Tab Title="Produits" Icon="product.png">
-                <ShellContent
-                ContentTemplate="{DataTemplate V:AboutPage}" />
-            </Tab>
-
-            <Tab Title="Paramètres" Icon="settings.png">
-                <ShellContent
-                ContentTemplate="{DataTemplate V:AboutPage}" />
-            </Tab>
-
-        </TabBar>
-
-
-
 </Shell>
-
-

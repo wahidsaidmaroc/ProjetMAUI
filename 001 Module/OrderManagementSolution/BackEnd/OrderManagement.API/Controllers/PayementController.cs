@@ -12,7 +12,7 @@ namespace OrderManagement.API.Controllers
     public class PayementController : ControllerBase
     {
 
-        private IPayementService _payementServices;
+        private readonly IPayementService _payementServices;
         public PayementController(IPayementService payementServices)
         {
             _payementServices = payementServices;
@@ -20,31 +20,106 @@ namespace OrderManagement.API.Controllers
 
         // GET: api/<PayementController>
         [HttpGet]
-        public IEnumerable<PayementDto> Get() => _payementServices.GetPayements();
+        [ProducesResponseType(typeof(IEnumerable<PayementDto>), StatusCodes.Status200OK)]
+        public ActionResult<IEnumerable<PayementDto>> Get()
+        {
+            return Ok(_payementServices.GetPayements());
+        }
 
         // GET api/<PayementController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(typeof(PayementDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<PayementDto> Get(int id)
         {
-            return "value";
+            if (id <= 0)
+            {
+                return BadRequest("Valid id is required.");
+            }
+
+            var payement = _payementServices.GetPayement(id);
+
+            if (payement == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(payement);
         }
 
         // POST api/<PayementController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(typeof(PayementDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<PayementDto> Post([FromBody] PayementDto value)
         {
+            if (value == null)
+            {
+                return BadRequest("Payload is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(value.DatePayement))
+            {
+                return BadRequest("Payment date is required.");
+            }
+
+            if (!DateTime.TryParse(value.DatePayement, out _))
+            {
+                return BadRequest("Payment date is invalid.");
+            }
+
+            var created = _payementServices.AddPayement(value);
+            return Created($"api/Payement/{created.PaymentNbr}", created);
         }
 
         // PUT api/<PayementController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult Put(int id, [FromBody] PayementDto value)
         {
+            if (value == null || id <= 0)
+            {
+                return BadRequest("Valid id and payload are required.");
+            }
+
+            if (!string.IsNullOrWhiteSpace(value.DatePayement) && !DateTime.TryParse(value.DatePayement, out _))
+            {
+                return BadRequest("Payment date is invalid.");
+            }
+
+            var updated = _payementServices.UpdatePayement(id, value);
+
+            if (!updated)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
 
         // DELETE api/<PayementController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult Delete(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("Valid id is required.");
+            }
+
+            var deleted = _payementServices.DeletePayement(id);
+
+            if (!deleted)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }

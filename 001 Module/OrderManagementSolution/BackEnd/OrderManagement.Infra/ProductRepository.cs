@@ -12,22 +12,54 @@ namespace OrderManagement.Infra
             _appMyDbContext = appMyDbContext;
         }
 
-        void Add (Product product)
+        public Product AddProduct(Product product)
         {
-            
+            _appMyDbContext.Products.Add(product);
+            _appMyDbContext.SaveChanges();
+
+            return product;
         }
 
-        void Update(Product product)
+        public bool Update(Product product)
         {
-            _appMyDbContext.Update<Product>(product);
+            var existing = _appMyDbContext.Products.Find(product.Id);
+
+            if (existing == null)
+            {
+                return false;
+            }
+
+            existing.ProdCode = product.ProdCode;
+            existing.ProdName = product.ProdName;
+            existing.ProdDescription = product.ProdDescription;
+            existing.UnitPrice = product.UnitPrice;
+
             _appMyDbContext.SaveChanges();
+
+            return true;
         }
-        Product? Get(int id)
+
+        public Product? Get(int id)
         {
             return _appMyDbContext.Find<Product>(id);
         }
 
-        public   IList<Product> GetProducts() => _appMyDbContext.Products.ToList();
+        public bool Delete(int id)
+        {
+            var existing = _appMyDbContext.Products.Find(id);
+
+            if (existing == null)
+            {
+                return false;
+            }
+
+            _appMyDbContext.Products.Remove(existing);
+            _appMyDbContext.SaveChanges();
+
+            return true;
+        }
+
+        public IList<Product> GetProducts() => _appMyDbContext.Products.ToList();
 
     }
 }

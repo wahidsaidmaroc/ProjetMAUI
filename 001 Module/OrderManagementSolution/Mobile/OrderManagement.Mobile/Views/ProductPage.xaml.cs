@@ -8,14 +8,7 @@ public partial class ProductPage : ContentPage
 	public ProductPage()
 	{
 		InitializeComponent();
-
-        Label titre = new Label();
-        titre.Text = "Bonjour depuis Said WAHID";
-        titre.FontSize = 24;
-        titre.TextColor = Colors.DarkBlue;
-        titre.HorizontalOptions = LayoutOptions.Center;
-        
-        Content = titre;
+        BindingContext = this;
 
     }
 
