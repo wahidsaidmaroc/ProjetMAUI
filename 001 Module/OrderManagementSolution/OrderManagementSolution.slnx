@@ -13,7 +13,6 @@
   <Folder Name="/Test/" />
   <Folder Name="/Test/BackEnd/">
     <Project Path="Teste/BackEnd/OrderManagement.Application.Test/OrderManagement.Application.Test.csproj" Id="a940ae30-7a9e-4f21-b95b-11f4f6bfb19e" />
-    <Project Path="TestProject1/TestProject1.csproj" Id="1cb47503-9f5b-4a54-a67b-cd66cd9def8b" />
   </Folder>
 
 
