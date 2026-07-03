@@ -1,0 +1,48 @@
+name: Backend CI/CD to Azure App Service
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '001 Module/OrderManagementSolution/BackEnd/OrderManagement.API/**'
+      - '.github/workflows/backend-azure-appservice.yml'
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  PROJECT_PATH: '001 Module/OrderManagementSolution/BackEnd/OrderManagement.API/OrderManagement.API.csproj'
+  PUBLISH_DIR: '${{ github.workspace }}/publish'
+  # Remplace ce nom par le nom exact de ton App Service Azure.
+  AZURE_WEBAPP_NAME: 'YOUR_APP_SERVICE_NAME'
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore packages
+        run: dotnet restore "${{ env.PROJECT_PATH }}"
+
+      - name: Build API
+        run: dotnet build "${{ env.PROJECT_PATH }}" --configuration Release --no-restore
+
+      - name: Publish API
+        # Le dossier publish sert d'entrée au déploiement App Service.
+        run: dotnet publish "${{ env.PROJECT_PATH }}" --configuration Release --no-build --output "${{ env.PUBLISH_DIR }}"
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          # Ajoute le publish profile Azure dans GitHub Secrets sous le nom AZURE_WEBAPP_PUBLISH_PROFILE.
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ env.PUBLISH_DIR }}
