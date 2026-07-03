@@ -1,23 +1,22 @@
-name: Backend CI/CD to Azure App Service
+name: Deploy the OrderManagement API to Azure App Service
 
 on:
   push:
     branches:
       - main
-    paths:
-      - '001 Module/OrderManagementSolution/BackEnd/OrderManagement.API/**'
-      - '.github/workflows/backend-azure-appservice.yml'
   workflow_dispatch:
 
 env:
   DOTNET_VERSION: '10.0.x'
-  PROJECT_PATH: '001 Module/OrderManagementSolution/BackEnd/OrderManagement.API/OrderManagement.API.csproj'
+  API_PROJECT: '001 Module/OrderManagementSolution/BackEnd/OrderManagement.API/OrderManagement.API.csproj'
+  TEST_PROJECT: '001 Module/OrderManagementSolution/Teste/BackEnd/OrderManagement.Application.Test/OrderManagement.Application.Test.csproj'
+  SOLUTION_FILE: '001 Module/OrderManagementSolution/OrderManagementSolution.slnx'
   PUBLISH_DIR: '${{ github.workspace }}/publish'
-  # Remplace ce nom par le nom exact de ton App Service Azure.
   AZURE_WEBAPP_NAME: 'YOUR_APP_SERVICE_NAME'
 
 jobs:
-  build-and-deploy:
+  restore:
+    name: Restore dependencies
     runs-on: windows-latest
 
     steps:
@@ -29,20 +28,75 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Restore packages
-        run: dotnet restore "${{ env.PROJECT_PATH }}"
+      - name: Restore solution packages
+        run: dotnet restore "${{ env.SOLUTION_FILE }}"
 
-      - name: Build API
-        run: dotnet build "${{ env.PROJECT_PATH }}" --configuration Release --no-restore
+  build:
+    name: Build API
+    runs-on: windows-latest
+    needs: restore
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore API project
+        run: dotnet restore "${{ env.API_PROJECT }}"
+
+      - name: Build API project
+        run: dotnet build "${{ env.API_PROJECT }}" --configuration Release --no-restore
+
+  test:
+    name: Run backend tests
+    runs-on: windows-latest
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore test project
+        run: dotnet restore "${{ env.TEST_PROJECT }}"
+
+      - name: Run tests
+        run: dotnet test "${{ env.TEST_PROJECT }}" --configuration Release --no-restore --no-build
+
+  deploy:
+    name: Publish and deploy to Azure App Service
+    runs-on: windows-latest
+    needs: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore API project
+        run: dotnet restore "${{ env.API_PROJECT }}"
 
       - name: Publish API
-        # Le dossier publish sert d'entrée au déploiement App Service.
-        run: dotnet publish "${{ env.PROJECT_PATH }}" --configuration Release --no-build --output "${{ env.PUBLISH_DIR }}"
+        # Le dossier publish contient le site compilé à envoyer vers Azure.
+        run: dotnet publish "${{ env.API_PROJECT }}" --configuration Release --no-restore --output "${{ env.PUBLISH_DIR }}"
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          # Ajoute le publish profile Azure dans GitHub Secrets sous le nom AZURE_WEBAPP_PUBLISH_PROFILE.
+          # Secret GitHub attendu: AZURE_WEBAPP_PUBLISH_PROFILE.
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ${{ env.PUBLISH_DIR }}
+
