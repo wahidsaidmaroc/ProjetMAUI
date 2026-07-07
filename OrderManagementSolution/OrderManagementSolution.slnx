@@ -5,13 +5,7 @@
     <Project Path="BackEnd/OrderManagement.Domain/OrderManagement.Domain.csproj" />
     <Project Path="BackEnd/OrderManagement.Infra/OrderManagement.Infra.csproj" />
   </Folder>
-  <Folder Name="/Mobile/">
-    <Project Path="Mobile/OrderManagement.Mobile/OrderManagement.Mobile.csproj">
-      <Deploy Solution="Debug|*" />
-    </Project>
-  </Folder>
-  <Folder Name="/Test/" />
-  <Folder Name="/Test/BackEnd/">
+  <Folder Name="/Test/">
     <Project Path="Teste/BackEnd/OrderManagement.Application.Test/OrderManagement.Application.Test.csproj" Id="a940ae30-7a9e-4f21-b95b-11f4f6bfb19e" />
   </Folder>
 

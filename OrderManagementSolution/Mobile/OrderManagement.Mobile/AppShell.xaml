@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="OrderManagement.Mobile.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:V="clr-namespace:OrderManagement.Mobile.Views"
+        FlyoutBehavior="Flyout"
+    Title="OrderManagement.Mobile">
+
+    <TabBar FlyoutItemIsVisible="False">
+        <Tab Title="Accueil" Icon="home.png">
+            <ShellContent
+                Title="Accueil"
+                ContentTemplate="{DataTemplate V:ProductPage}" />
+        </Tab>
+
+        <Tab Title="Produits" Icon="home.png">
+            <ShellContent
+                Title="Produits"
+                ContentTemplate="{DataTemplate V:ProductPage}" />
+        </Tab>
+
+        <Tab Title="Connexion" Icon="home.png">
+            <ShellContent
+                Title="Connexion"
+                ContentTemplate="{DataTemplate V:LoginPage}" />
+        </Tab>
+    </TabBar>
+
+    <FlyoutItem Title="Aide" Icon="home.png" Route="aide">
+        <ShellContent
+            Title="Aide"
+            ContentTemplate="{DataTemplate V:AboutPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Parametres" Icon="home.png" Route="parametres">
+        <ShellContent
+            Title="Parametres"
+            ContentTemplate="{DataTemplate V:SettingsPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Mon compte" Icon="home.png" Route="mon-compte">
+        <ShellContent
+            Title="Mon compte"
+            ContentTemplate="{DataTemplate V:LoginPage}" />
+    </FlyoutItem>
+</Shell>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderManagement.Mobile.Views.ProductPage"
+             Title="ProductPage">
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <!-- Titre -->
+        <Label Grid.Row="0"
+               Text="Gestion des Produits"
+               FontSize="24"
+               FontAttributes="Bold"
+               Margin="15,10"/>
+
+        <!-- Barre de recherche -->
+        <SearchBar Grid.Row="1"
+                   Placeholder="Rechercher un produit..."
+                   Margin="10"/>
+
+        <!-- Liste -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Products}"
+                        Margin="10">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                      <Border StrokeThickness="1"
+                        Padding="12"
+                        Margin="0,0,0,10">
+                       <Grid ColumnDefinitions="*,Auto"
+                          RowDefinitions="Auto,Auto">
+                        <Label Grid.Row="0"
+                            Grid.Column="0"
+                            Text="{Binding Description}"
+                            FontAttributes="Bold"
+                            FontSize="16" />
+
+                        <Label Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding ProductCode}"
+                            HorizontalTextAlignment="End"
+                            TextColor="Gray" />
+
+                        <Label Grid.Row="1"
+                            Grid.Column="0"
+                            Text="{Binding Price, StringFormat='Prix: {0} MAD'}" />
+
+                        <Label Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding Stock, StringFormat='Stock: {0}'}"
+                            HorizontalTextAlignment="End" />
+                       </Grid>
+                      </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+            
+            
+
+        </CollectionView>
+
+     
+
+    </Grid>
+</ContentPage>
+
+
+
+
