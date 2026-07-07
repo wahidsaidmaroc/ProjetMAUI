@@ -33,6 +33,12 @@
             ContentTemplate="{DataTemplate V:AboutPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Catégories" Icon="home.png" Route="categories">
+        <ShellContent
+            Title="Catégories"
+            ContentTemplate="{DataTemplate V:CategoryPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Parametres" Icon="home.png" Route="parametres">
         <ShellContent
             Title="Parametres"

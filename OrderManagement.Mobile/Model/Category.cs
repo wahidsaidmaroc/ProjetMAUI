@@ -1,8 +1,15 @@
-﻿namespace OrderManagement.Mobile.Model;
+﻿using System.Text.Json.Serialization;
+
+namespace OrderManagement.Mobile.Model;
 
 public class Category
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("cle")]
+    public int Cle { get; set; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    [JsonPropertyName("description")]
     public string? Description { get; set; }
 }
