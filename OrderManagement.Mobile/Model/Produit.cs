@@ -1,14 +1,18 @@
-﻿namespace OrderManagement.Mobile.Model;
+﻿using System.Text.Json.Serialization;
+
+namespace OrderManagement.Mobile.Model;
 
 public class Product
 {
-    public int Id { get; set; }
+    [JsonPropertyName("cle")]
+    public int Cle { get; set; }
 
-    public string ProductCode { get; set; } = string.Empty;
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
 
-    public string Description { get; set; } = "";
+    [JsonPropertyName("description")]
+    public string? Description { get; set; }
 
+    [JsonPropertyName("prix")]
     public decimal Price { get; set; }
-
-    public int Stock { get; set; }
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderManagement.Mobile.Views.CartPage"
+             Title="Panier">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+            <Label Text="Mon panier"
+                   Style="{StaticResource SectionTitle}" />
+            <Label Text="{Binding ItemCountText}"
+                   Style="{StaticResource SectionSubtitle}" />
+
+            <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView.EmptyView>
+                    <Frame Style="{StaticResource AmazonCard}">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Votre panier est vide."
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource AmazonText}" />
+                            <Label Text="Ajoutez des produits pour commencer vos achats."
+                                   Style="{StaticResource SectionSubtitle}" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource AmazonCard}">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+                                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                    <Label Text="{Binding Product.Name}" FontAttributes="Bold" FontSize="16" />
+                                    <Label Text="{Binding Product.Description}" Style="{StaticResource SectionSubtitle}" />
+                                    <Label Text="{Binding Total, StringFormat='Total: {0} MAD'}" TextColor="{StaticResource AmazonBlue}" />
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1"
+                                        Text="Supprimer"
+                                        Clicked="OnRemoveClicked"
+                                        CommandParameter="{Binding Product.Cle}" />
+
+                                <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8">
+                                    <Button Text="-" WidthRequest="40" Clicked="OnDecreaseClicked" CommandParameter="{Binding Product.Cle}" />
+                                    <Label Text="{Binding Quantity}" VerticalOptions="Center" FontAttributes="Bold" />
+                                    <Button Text="+" WidthRequest="40" Clicked="OnIncreaseClicked" CommandParameter="{Binding Product.Cle}" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Frame Style="{StaticResource AmazonCard}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Récapitulatif" FontAttributes="Bold" FontSize="18" />
+                    <Label Text="{Binding TotalText}" />
+                    <Button Text="Passer à la commande" Clicked="OnCheckoutClicked" />
+                    <Button Text="Vider le panier" BackgroundColor="{StaticResource AmazonBlue}" TextColor="White" Clicked="OnClearClicked" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

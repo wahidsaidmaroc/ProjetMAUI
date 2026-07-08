@@ -21,7 +21,11 @@ namespace OrderManagement.Mobile
             {
                 BaseAddress = new Uri(GetApiBaseAddress())
             });
+            builder.Services.AddSingleton<ICartService, CartService>();
             builder.Services.AddSingleton<ICategoryService, CategoryService>();
+            builder.Services.AddSingleton<IProductService, ProductService>();
+            builder.Services.AddSingleton<IOrderService, OrderService>();
+            builder.Services.AddSingleton<IPayementService, PayementService>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

@@ -1,18 +1,126 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OrderManagement.Mobile.MainPage">
+             x:Class="OrderManagement.Mobile.MainPage"
+             Title="Accueil">
 
-    <VerticalStackLayout Padding="20" Spacing="10">
-        <Label Text="Bienvenue !" FontSize="24" />
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="18">
 
-        <Label Text="Bonjour"
-       FontSize="22"
-       TextColor="DarkBlue"
-       HorizontalOptions="Center" />
+            <Frame Style="{StaticResource AmazonCard}">
+                <Grid ColumnDefinitions="2*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="10">
+                    <VerticalStackLayout Spacing="8">
+                        <Frame BackgroundColor="{StaticResource AmazonOrange}" Padding="8,4" CornerRadius="12" HasShadow="False" HorizontalOptions="Start">
+                            <Label Text="MEILLEURES OFFRES" FontSize="12" FontAttributes="Bold" TextColor="White" />
+                        </Frame>
 
+                        <Label Text="Bienvenue sur OrderManagement"
+                               Style="{StaticResource SectionTitle}" />
+                        <Label Text="Découvrez nos produits, vos promotions du jour et des recommandations pensées pour vous."
+                               Style="{StaticResource SectionSubtitle}" />
+                    </VerticalStackLayout>
 
-    </VerticalStackLayout>
+                    <Image Grid.Column="1"
+                           Source="home.png"
+                           HeightRequest="120"
+                           WidthRequest="120"
+                           Aspect="AspectFit"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center" />
 
+                    <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="10">
+                        <Button Text="Voir le catalogue" Clicked="OnGoCatalogClicked" />
+                        <Button Text="Mon panier" BackgroundColor="{StaticResource AmazonBlue}" TextColor="White" Clicked="OnGoCartClicked" />
+                    </HorizontalStackLayout>
+                </Grid>
+            </Frame>
 
+            <Grid RowDefinitions="Auto,*" RowSpacing="10">
+                <Label Text="Offres du moment" Style="{StaticResource SectionTitle}" />
+
+                <CarouselView x:Name="SlidesCarousel"
+                              Grid.Row="1"
+                              ItemsSource="{Binding Slides}"
+                              HeightRequest="210"
+                              IndicatorView="slideIndicators"
+                              IsSwipeEnabled="True">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource AmazonCard}">
+                                <Grid ColumnDefinitions="2*,*" RowDefinitions="Auto,Auto,Auto">
+                                    <VerticalStackLayout Spacing="6">
+                                        <Label Text="{Binding Title}" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource AmazonDark}" />
+                                        <Label Text="{Binding Subtitle}" Style="{StaticResource SectionSubtitle}" />
+                                        <Button Text="Découvrir" BackgroundColor="{StaticResource AmazonOrange}" TextColor="White" HorizontalOptions="Start" />
+                                    </VerticalStackLayout>
+
+                                    <Image Grid.Column="1"
+                                           Source="{Binding Image}"
+                                           Aspect="AspectFit"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+                <IndicatorView x:Name="slideIndicators"
+                               Grid.Row="1"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End"
+                               IndicatorColor="{StaticResource AmazonBorder}"
+                               SelectedIndicatorColor="{StaticResource AmazonOrange}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto,*" RowSpacing="10">
+                <Label Text="Produits en promotion" Style="{StaticResource SectionTitle}" />
+                <CollectionView Grid.Row="1"
+                                ItemsSource="{Binding PromotionProducts}"
+                                ItemsLayout="HorizontalList"
+                                HorizontalScrollBarVisibility="Never">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource AmazonCard}" WidthRequest="180" Margin="0,0,12,0">
+                                <VerticalStackLayout Spacing="6">
+                                    <Frame BackgroundColor="{StaticResource AmazonOrange}" Padding="8,4" CornerRadius="12" HasShadow="False" HorizontalOptions="Start">
+                                        <Label Text="PROMO" FontSize="11" FontAttributes="Bold" TextColor="White" />
+                                    </Frame>
+                                    <Image Source="home.png" HeightRequest="80" Aspect="AspectFit" />
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Description}" Style="{StaticResource SectionSubtitle}" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Price, StringFormat='Prix promo: {0} MAD'}" TextColor="{StaticResource AmazonOrange}" FontAttributes="Bold" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <Grid RowDefinitions="Auto,*" RowSpacing="10">
+                <Label Text="Produits recommandés" Style="{StaticResource SectionTitle}" />
+                <CollectionView Grid.Row="1"
+                                ItemsSource="{Binding RecommendedProducts}"
+                                ItemsLayout="HorizontalList"
+                                HorizontalScrollBarVisibility="Never">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource AmazonCard}" WidthRequest="180" Margin="0,0,12,0">
+                                <VerticalStackLayout Spacing="6">
+                                    <Frame BackgroundColor="{StaticResource AmazonBlue}" Padding="8,4" CornerRadius="12" HasShadow="False" HorizontalOptions="Start">
+                                        <Label Text="RECOMMANDÉ" FontSize="11" FontAttributes="Bold" TextColor="White" />
+                                    </Frame>
+                                    <Image Source="dotnet_bot.png" HeightRequest="80" Aspect="AspectFit" />
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Description}" Style="{StaticResource SectionSubtitle}" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Price, StringFormat='Prix: {0} MAD'}" TextColor="{StaticResource AmazonBlue}" FontAttributes="Bold" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

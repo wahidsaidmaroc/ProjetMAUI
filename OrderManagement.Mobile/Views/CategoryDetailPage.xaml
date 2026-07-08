@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderManagement.Mobile.Views.CategoryDetailPage"
+             Title="Détail catégorie"
+             BackgroundColor="White">
+
+    <Grid Padding="16" RowDefinitions="Auto,Auto,Auto,Auto">
+        <Label Text="{Binding CategoryName}"
+               FontSize="26"
+               FontAttributes="Bold"
+               TextColor="#111827" />
+
+        <Label Grid.Row="1"
+               Margin="0,12,0,0"
+               Text="{Binding CategoryDescription}"
+               FontSize="14"
+               TextColor="#4B5563" />
+
+        <Label Grid.Row="2"
+               Margin="0,20,0,0"
+               Text="Cette page est ouverte depuis le menu latéral dynamique."
+               FontSize="14"
+               TextColor="#374151" />
+
+        <Button Grid.Row="3"
+                Margin="0,24,0,0"
+                Text="Voir les produits"
+                Clicked="OnProductsClicked" />
+    </Grid>
+</ContentPage>

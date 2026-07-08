@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderManagement.Mobile.Views.OrderPage"
+             Title="Commande">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+            <Label Text="Créer une commande"
+                   Style="{StaticResource SectionTitle}" />
+            <Label Text="Confirmez votre panier pour enregistrer la commande côté backend."
+                   Style="{StaticResource SectionSubtitle}" />
+
+            <Frame Style="{StaticResource AmazonCard}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Résumé" FontAttributes="Bold" FontSize="18" />
+                    <Label Text="{Binding TotalText}" />
+                    <Label Text="{Binding StatusMessage}" TextColor="{StaticResource AmazonBlue}" />
+                    <Button Text="Créer la commande" Clicked="OnCreateOrderClicked" />
+                    <Button Text="Voir le paiement" BackgroundColor="{StaticResource AmazonBlue}" TextColor="White" Clicked="OnGoPaymentClicked" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

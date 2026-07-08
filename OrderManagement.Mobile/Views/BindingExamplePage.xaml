@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderManagement.Mobile.Views.BindingExamplePage"
+             Title="Exemple Binding .NET MAUI">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+            <Label Text="Exemple Binding .NET MAUI"
+                   Style="{StaticResource SectionTitle}" />
+
+            <Label Text="Cette page montre comment lier une vue XAML à un ViewModel avec BindingContext, TwoWay et Command."
+                   Style="{StaticResource SectionSubtitle}" />
+
+            <Frame Style="{StaticResource AmazonCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Nom d'utilisateur" FontAttributes="Bold" />
+                    <Entry Placeholder="Saisir votre nom"
+                           Text="{Binding UserName, Mode=OneTime}" />
+                    
+                    <Label Text="{Binding UserName,
+                        StringFormat='Valeur saisie : {0}'}"
+                           TextColor="{StaticResource AmazonBlue}" />
+
+                    <Label Text="Email" FontAttributes="Bold" Margin="0,8,0,0" />
+                    
+                    <Entry Placeholder="Saisir votre email"
+                           Keyboard="Email"
+                           Text="{Binding Email, Mode=TwoWay}" />
+                    
+                    <Label Text="{Binding Email, StringFormat='Email saisi : {0}'}"
+                           TextColor="{StaticResource AmazonBlue}" />
+
+                    <Button Text="Enregistrer"
+                            Command="{Binding SaveCommand}" />
+
+                    <Label Text="{Binding ResultMessage}"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource AmazonOrange}" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -2,15 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OrderManagement.Mobile.Views.CategoryPage"
-              Title="Catégories"
-              BackgroundColor="White">
+              Title="Catégories">
 
     <Grid Padding="16" RowDefinitions="Auto,Auto,Auto,*">
 
         <Label Text="Menu des catégories"
-               FontSize="24"
-               FontAttributes="Bold"
-               TextColor="#1F2937" />
+               Style="{StaticResource SectionTitle}" />
 
         <ActivityIndicator Grid.Row="1"
                            Margin="0,12,0,8"
@@ -25,7 +22,9 @@
                Margin="0,0,0,8" />
 
         <CollectionView Grid.Row="3"
-                         ItemsSource="{Binding Categories}">
+                         ItemsSource="{Binding Categories}"
+                         SelectionMode="Single"
+                         SelectionChanged="OnCategorySelectionChanged">
             <CollectionView.EmptyView>
                 <Label Text="Aucune catégorie disponible."
                        HorizontalOptions="Center"

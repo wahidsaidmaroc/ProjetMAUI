@@ -7,7 +7,10 @@
   </Folder>
   <Folder Name="/Test/">
     <Project Path="Teste/BackEnd/OrderManagement.Application.Test/OrderManagement.Application.Test.csproj" Id="a940ae30-7a9e-4f21-b95b-11f4f6bfb19e" />
+    <Project Path="Teste/BackEnd/OrderManagement.API.Test/OrderManagement.API.Test.csproj" Id="2d5b9f4f-5a70-46d5-8f49-31e79a1d0f86" />
   </Folder>
+  <Folder Name="/Teste/" />
+  <Folder Name="/Teste/BackEnd/" />
 
 
 </Solution>

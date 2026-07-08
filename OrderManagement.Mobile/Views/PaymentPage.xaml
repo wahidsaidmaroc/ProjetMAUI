@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderManagement.Mobile.Views.PaymentPage"
+             Title="Paiement">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+            <Label Text="Paiement"
+                   Style="{StaticResource SectionTitle}" />
+            <Label Text="Enregistrez le paiement côté backend.
+            " Style="{StaticResource SectionSubtitle}" />
+
+            <Frame Style="{StaticResource AmazonCard}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{Binding TotalText}" FontAttributes="Bold" />
+                    <Entry Placeholder="Numéro de paiement" Text="{Binding PaymentNumber}" Keyboard="Numeric" />
+                    <Button Text="Payer maintenant" Clicked="OnPayClicked" />
+                    <Label Text="{Binding StatusMessage}" TextColor="{StaticResource AmazonBlue}" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
